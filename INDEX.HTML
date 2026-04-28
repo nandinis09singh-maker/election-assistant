@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nandini Singh - Election Assistant</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      animation: fadeInDown 1s ease;
+    }
+
+    p {
+      margin-top: -10px;
+      opacity: 0.9;
+    }
+
+    #chat {
+      background: white;
+      color: black;
+      padding: 15px;
+      border-radius: 10px;
+      height: 320px;
+      overflow-y: auto;
+      width: 80%;
+      margin: 20px auto;
+      text-align: left;
+    }
+
+    .user, .bot {
+      margin: 10px 0;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .user { color: #1e3c72; }
+    .bot { color: #2a9d8f; }
+
+    input {
+      padding: 12px;
+      width: 60%;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: #e68900;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Nandini Singh 🗳️</h1>
+  <p>Your Election Assistant</p>
+
+  <div id="chat"></div>
+
+  <input id="input" placeholder="Ask about voting..." />
+  <button onclick="send()">Send</button>
+
+<script>
+function send() {
+  const inputBox = document.getElementById("input");
+  const message = inputBox.value.toLowerCase();
+  const chat = document.getElementById("chat");
+
+  if (!message.trim()) return;
+
+  chat.innerHTML += `<p class="user"><b>You:</b> ${message}</p>`;
+
+  // typing effect
+  const typing = document.createElement("p");
+  typing.className = "bot";
+  typing.innerText = "Assistant is typing...";
+  chat.appendChild(typing);
+
+  setTimeout(() => {
+    typing.remove();
+
+    let reply = "";
+
+    // 🗳️ Election logic
+    if (message.includes("vote") || message.includes("how")) {
+      reply = `
+      🗳️ Voting Process:
+      1. Register as a voter<br>
+      2. Check your name in voter list<br>
+      3. Go to polling booth<br>
+      4. Verify identity<br>
+      5. Press button on EVM<br>
+      ✅ Done!
+      `;
+    }
+
+    else if (message.includes("register")) {
+      reply = `
+      📝 Registration Steps:<br>
+      - Go to Election Commission website<br>
+      - Fill Form 6<br>
+      - Upload ID proof<br>
+      - Wait for approval
+      `;
+    }
+
+    else if (message.includes("eligible")) {
+      reply = `
+      ✔️ Eligibility:<br>
+      - Age 18+<br>
+      - Indian citizen<br>
+      - Name in voter list
+      `;
+    }
+
+    else {
+      reply = "Ask me about voting, registration, or election process 🗳️";
+    }
+
+    chat.innerHTML += `<p class="bot"><b>Assistant:</b><br>${reply}</p>`;
+  }, 1000);
+
+  inputBox.value = "";
+}
+</script>
+
+</body>
+</html>
